@@ -1,0 +1,45 @@
+in the CMD :
+
+cd c:\Users\user\AppData\Local\Programs\mongosh
+
+
+mongosh
+
+
+db.enrollments.aggregate([
+  {
+    $lookup: {
+      from: "students",
+      localField: "student_id",
+      foreignField: "_id",
+      as: "student_info"
+    }
+  },
+  {
+    $lookup: {
+      from: "courses",
+      localField: "course_id",
+      foreignField: "_id",
+      as: "course_info"
+    }
+  },
+  {
+    $project: {
+      _id: 1,
+      student_info: { $arrayElemAt: ["$student_info", 0] },
+      course_info:  { $arrayElemAt: ["$course_info", 0] }
+    }
+  }
+])
+
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+
+in VS Terminal:
+
+cd mongodb_project
+
+
+node mongo.js
+
+
