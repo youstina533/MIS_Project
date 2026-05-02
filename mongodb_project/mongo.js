@@ -67,7 +67,7 @@ async function run() {
       { _id: 1 },
       { $set: { "Score.2": 5 } }
     );
-    await students.updateOne(
+    await students.updateMany(
       { _id: { $ne: 1 } },
       { $set: { "Score.3": 6 } }
     );
